@@ -1,0 +1,319 @@
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  padding: 18px 42px;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.03)
+  );
+  backdrop-filter: blur(24px);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+
+  /* allow overlap */
+  overflow: visible;
+}
+
+/* ================= FLOATING LOGO BADGE ================= */
+.logo-badge {
+  position: absolute;
+  left: -18px;        /* pushes it outside navbar */
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+
+  /* glass look */
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.06)
+  );
+  backdrop-filter: blur(18px);
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+
+  /* subtle float */
+  animation: floatAbout 7s ease-in-out infinite;
+  border: 1px solid rgba(255,255,255,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+
+  transition: transform 0.3s ease;
+}
+
+/* subtle hover lift */
+.logo-badge:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* LOGO IMAGE */
+.logo-badge img {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+}
+
+/* ================= BRAND TEXT ================= */
+.nav-left {
+  margin-left: 58px; /* space for logo */
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+
+ul {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* RESET BUTTON */
+ul li button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(229, 231, 235, 0.85);
+
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  position: relative;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.2s ease;
+}
+
+/* HOVER STATE */
+ul li button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* UNDERLINE GLOW */
+ul li button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 189, 248, 0.9),
+    transparent
+  );
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+ul li button:hover::after {
+  width: 60%;
+}
+
+/* ACTIVE CLICK FEEL */
+ul li button:active {
+  transform: scale(0.97);
+}
+/* ===== BASE NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  padding: 14px 24px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== DESKTOP LINKS ===== */
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: rgba(229,231,235,0.85);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.nav-links button:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+/* ===== MENU TOGGLE ===== */
+.menu-toggle {
+  display: none;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  width: 90%;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu.open {
+  z-index: 10000;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mobile-menu button {
+  background: rgba(255,255,255,0.06);
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 1rem;
+  color: #e5e7eb;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-menu button:hover {
+  background: rgba(56,189,248,0.15);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .desktop {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .logo-badge {
+    width: 86px;
+    height: 86px;
+    left: -14px;
+  }
+
+  .logo-badge img {
+      width: 70px;
+      height: 70px;
+  }
+
+  .nav-left {
+    margin-left: 52px;
+  }
+  ul {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  ul li button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  :root {
+    --h1-size: 2.4rem;
+    --h2-size: 1.8rem;
+    --h3-size: 1.3rem;
+    --body-size: 0.55rem;
+  }
+
+  h1 {
+    font-size: var(--h1-size) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: var(--h2-size) !important;
+  }
+
+  h3 {
+    font-size: var(--h3-size) !important;
+  }
+
+  p{
+    font-size: 12px !important;
+  }
+  li,
+  span {
+    font-size: var(--body-size) !important;
+    line-height: 1.2 !important;
+  }
+}

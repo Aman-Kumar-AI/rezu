@@ -1,0 +1,38 @@
+<nav class="navbar glass">
+  <div class="logo-badge" (click)="scrollTo('home')">
+    <img
+      src="assets/images/aman-logo.png"
+      alt="Aman Kumar Logo"
+    />
+  </div>
+  <div class="nav-left" (click)="scrollTo('home')">
+    Aman
+  </div>
+
+  <!-- DESKTOP MENU -->
+  <ul class="nav-links desktop">
+    <li><button (click)="scrollTo('home')">Home</button></li>
+    <li><button (click)="scrollTo('about')">About</button></li>
+    <li><button (click)="scrollTo('skills')">Skills</button></li>
+    <li><button (click)="scrollTo('experience')">Experience</button></li>
+    <li><button (click)="scrollTo('projects')">Projects</button></li>
+    <li><button (click)="scrollTo('education')">Education</button></li>
+    <li><button (click)="scrollTo('contact')">Contact</button></li>
+  </ul>
+
+  <!-- MOBILE TOGGLE -->
+  <button class="menu-toggle" (click)="toggleMenu()">
+    ☰
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu glass" [class.open]="menuOpen">
+  <button (click)="navigate('home')">Home</button>
+  <button (click)="navigate('about')">About</button>
+  <button (click)="navigate('skills')">Skills</button>
+  <button (click)="navigate('experience')">Experience</button>
+  <button (click)="navigate('projects')">Projects</button>
+  <button (click)="navigate('education')">Education</button>
+  <button (click)="navigate('contact')">Contact</button>
+</div>

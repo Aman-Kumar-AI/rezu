@@ -1,0 +1,28 @@
+footer {
+  margin: 40px;
+  padding: 20px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+h1 {
+    font-size: var(--h1-size) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: var(--h2-size) !important;
+  }
+
+  h3 {
+    font-size: var(--h3-size) !important;
+  }
+
+  p{
+    font-size: 12px !important;
+  }
+  li,
+  span {
+    font-size: var(--body-size) !important;
+    line-height: 1.2 !important;
+  }
+}

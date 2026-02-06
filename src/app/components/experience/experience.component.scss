@@ -1,0 +1,152 @@
+.experience {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 64px;
+  font-size: 2.6rem;
+}
+.blur{
+  background: linear-gradient(
+  to right,
+  transparent 0%,
+  rgba(6, 8, 18, 0.2) 45%,
+  rgba(6, 8, 18, 0.95) 50%,
+  rgba(6, 8, 18, 0.2) 55%,
+  transparent 100%
+);
+
+}
+
+/* LIST */
+.experience-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* CARD */
+.experience-card {
+  padding: 36px;
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* LEFT ACCENT (TIMELINE FEEL) */
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(56,189,248,0.8),
+    rgba(99,102,241,0.8)
+  );
+  border-radius: 4px;
+}
+
+/* HOVER */
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 50px 100px rgba(0,0,0,0.75),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* HEADER */
+.experience-header {
+  margin-bottom: 20px;
+}
+
+.experience-header h3 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.company {
+  display: block;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.period {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--accent-blue);
+  margin-top: 4px;
+}
+
+/* BULLETS */
+.experience-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-points li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+/* CUSTOM BULLET */
+.experience-points li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .experience-card {
+    padding: 28px;
+  }
+
+  .experience-header h3 {
+    font-size: 1.25rem;
+  }
+  :root {
+    --h1-size: 2.4rem;
+    --h2-size: 1.8rem;
+    --h3-size: 1.3rem;
+    --body-size: 0.55rem;
+  }
+
+  h1 {
+    font-size: var(--h1-size) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: var(--h2-size) !important;
+  }
+
+  h3 {
+    font-size: var(--h3-size) !important;
+  }
+
+  p{
+    font-size: 12px !important;
+  }
+  li{
+    font-size: 12px !important;
+  }
+  span {
+    font-size: var(--body-size) !important;
+    line-height: 1.2 !important;
+  }
+}
