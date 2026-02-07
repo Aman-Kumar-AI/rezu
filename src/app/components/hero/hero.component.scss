@@ -1,5 +1,5 @@
 .hero {
-  min-height: 105vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
 }
@@ -147,7 +147,7 @@
 /* ================= MOBILE ================= */
 @media (max-width: 900px) {
   .hero {
-  min-height: 115vh;
+  min-height: 100vh;
 }
   .hero-grid {
     grid-template-columns: 1fr;
@@ -186,11 +186,6 @@
   );
   
   border-left: 2px solid rgba(56,189,248,0.45);
-  }
-  .hero-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
   }
 
   .hero-actions {
