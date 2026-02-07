@@ -21,34 +21,56 @@ export class ContactComponent {
 
   contactForm: FormGroup;
   isSubmitting = false;
+
   showSuccess = false;
   showError = false;
 
-  messageSent= ""
-  info="Thank you for reaching out. I’ll get back to you soon."
-
-
   constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(100),
+          this.maxWordsValidator(3)
+        ]
+      ],
       email: [
         '',
         [
           Validators.required,
-          Validators.email
+          Validators.email,
+          Validators.maxLength(150)
         ]
       ],
       message: [
         '',
         [
           Validators.required,
+          Validators.maxLength(500),
           this.minWordsValidator(10)
         ]
-      ]
+      ],
+      company: [''] // honeypot
     });
   }
 
-  /* ---------- VALIDATORS ---------- */
+  /* ---------------- CUSTOM VALIDATORS ---------------- */
+
+  maxWordsValidator(maxWords: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+
+      const words = control.value
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+      return words.length <= maxWords
+        ? null
+        : { maxWords: true };
+    };
+  }
 
   minWordsValidator(minWords: number) {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -65,38 +87,53 @@ export class ContactComponent {
     };
   }
 
-  /* ---------- HELPERS ---------- */
+  /* ---------------- ERROR HELPERS ---------------- */
 
   isInvalid(controlName: string): boolean {
     const control = this.contactForm.get(controlName);
     return !!(control && control.touched && control.invalid);
   }
 
-  get emailError(): 'required' | 'invalid' | null {
-    const control = this.contactForm.get('email');
-    if (!control || !control.touched) return null;
+  get nameError(): 'required' | 'maxLength' | 'maxWords' | null {
+    const c = this.contactForm.get('name');
+    if (!c || !c.touched) return null;
 
-    if (control.hasError('required')) return 'required';
-    if (control.hasError('email')) return 'invalid';
+    if (c.hasError('required')) return 'required';
+    if (c.hasError('maxlength')) return 'maxLength';
+    if (c.hasError('maxWords')) return 'maxWords';
     return null;
   }
 
-  get messageError(): 'required' | 'minWords' | null {
-    const control = this.contactForm.get('message');
-    if (!control || !control.touched) return null;
+  get emailError(): 'required' | 'invalid' | 'maxLength' | null {
+    const c = this.contactForm.get('email');
+    if (!c || !c.touched) return null;
 
-    if (control.hasError('required')) return 'required';
-    if (control.hasError('minWords')) return 'minWords';
+    if (c.hasError('required')) return 'required';
+    if (c.hasError('email')) return 'invalid';
+    if (c.hasError('maxlength')) return 'maxLength';
     return null;
   }
 
-  /* ---------- SUBMIT ---------- */
+  get messageError(): 'required' | 'minWords' | 'maxLength' | null {
+    const c = this.contactForm.get('message');
+    if (!c || !c.touched) return null;
+
+    if (c.hasError('required')) return 'required';
+    if (c.hasError('minWords')) return 'minWords';
+    if (c.hasError('maxlength')) return 'maxLength';
+    return null;
+  }
+
+  /* ---------------- SUBMIT ---------------- */
 
   onSubmit(): void {
-    if (this.contactForm.invalid) {
+    if (this.contactForm.invalid || this.isSubmitting) {
       this.contactForm.markAllAsTouched();
       return;
     }
+
+    // Honeypot protection
+    if (this.contactForm.value.company) return;
 
     this.isSubmitting = true;
 
@@ -108,29 +145,20 @@ export class ContactComponent {
         email: this.contactForm.value.email,
         message: this.contactForm.value.message,
       },
-      'WG3ucUQdB8_YfyJ6'
+      'WG3ucUQdB8_YfyJ6w'
     ).then(
       () => {
-        this.contactForm.reset();
         this.isSubmitting = false;
         this.showSuccess = true;
-        this.isSubmitting = false;
         this.contactForm.reset();
 
-        setTimeout(() => {
-          this.showSuccess = false;
-}, 2500);
-
+        setTimeout(() => (this.showSuccess = false), 2500);
       },
-      (error) => {
-        console.error('EmailJS Error:', error);
+      () => {
         this.isSubmitting = false;
-this.showError = true;
+        this.showError = true;
 
-setTimeout(() => {
-  this.showError = false;
-}, 3000);
-
+        setTimeout(() => (this.showError = false), 3000);
       }
     );
   }

@@ -66,21 +66,19 @@
     (ngSubmit)="onSubmit()"
   >
 
-    <input
-      type="text"
-      placeholder="Your Name"
-      formControlName="name"
-    />
-    <small *ngIf="isInvalid('name')">Name is required</small>
+    <!-- NAME -->
+    <input type="text" placeholder="Your Name" formControlName="name" />
+    <small *ngIf="nameError === 'required'">Name is required</small>
+    <small *ngIf="nameError === 'maxWords'">Name can contain up to 3 words only</small>
+    <small *ngIf="nameError === 'maxLength'">Name cannot exceed 100 characters</small>
 
-    <input
-      type="email"
-      placeholder="Your Email"
-      formControlName="email"
-    />
+    <!-- EMAIL -->
+    <input type="email" placeholder="Your Email" formControlName="email" />
     <small *ngIf="emailError === 'required'">Email is required</small>
-    <small *ngIf="emailError === 'invalid'">Enter a valid email</small>
+    <small *ngIf="emailError === 'invalid'">Enter a valid email address</small>
+    <small *ngIf="emailError === 'maxLength'">Email cannot exceed 150 characters</small>
 
+    <!-- MESSAGE -->
     <textarea
       placeholder="Your Message (minimum 20 words)"
       formControlName="message"
@@ -89,6 +87,10 @@
     <small *ngIf="messageError === 'minWords'">
       Message must be at least 20 words
     </small>
+    <small *ngIf="messageError === 'maxLength'">
+      Message cannot exceed 500 characters
+    </small>
+
 
     <button
       type="submit"
