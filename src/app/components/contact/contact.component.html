@@ -21,12 +21,87 @@
     </div>
 
     <!-- SECONDARY FORM -->
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" />
-      <input type="email" placeholder="Your Email" />
-      <textarea placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <div class="contact-wrapper">
+
+  <!-- LOADER OVERLAY -->
+  <div class="loader-overlay" *ngIf="isSubmitting">
+    <span class="loader"></span>
+    <p>Sending your message…</p>
+  </div>
+  <!-- SUCCESS OVERLAY -->
+<div class="success-overlay" *ngIf="showSuccess">
+  <div class="success-card">
+    <div class="checkmark">
+      <svg viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="25" fill="none" />
+        <path fill="none" d="M14 27l7 7 17-17" />
+      </svg>
+    </div>
+    <h3>Message Sent</h3>
+    <p>Thank you for reaching out. I’ll get back to you soon.</p>
+  </div>
+</div>
+<!-- ERROR OVERLAY -->
+<div class="error-overlay" *ngIf="showError">
+  <div class="error-card">
+    <div class="crossmark">
+      <svg viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="25" fill="none" />
+        <path d="M16 16l20 20M36 16L16 36" />
+      </svg>
+    </div>
+    <h3>Message Not Sent</h3>
+    <p>
+      Something went wrong while sending your message.
+      Please try again in a moment.
+    </p>
+  </div>
+</div>
+
+
+  <!-- FORM -->
+  <form
+    class="contact-form"
+    [formGroup]="contactForm"
+    (ngSubmit)="onSubmit()"
+  >
+
+    <input
+      type="text"
+      placeholder="Your Name"
+      formControlName="name"
+    />
+    <small *ngIf="isInvalid('name')">Name is required</small>
+
+    <input
+      type="email"
+      placeholder="Your Email"
+      formControlName="email"
+    />
+    <small *ngIf="emailError === 'required'">Email is required</small>
+    <small *ngIf="emailError === 'invalid'">Enter a valid email</small>
+
+    <textarea
+      placeholder="Your Message (minimum 20 words)"
+      formControlName="message"
+    ></textarea>
+    <small *ngIf="messageError === 'required'">Message is required</small>
+    <small *ngIf="messageError === 'minWords'">
+      Message must be at least 20 words
+    </small>
+
+    <button
+      type="submit"
+      [disabled]="contactForm.invalid || isSubmitting"
+    >
+      Send Message
+    </button>
+
+  </form>
+</div>
+
+
+
 
   </div>
 </section>
